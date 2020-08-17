@@ -132,7 +132,7 @@ def test_order_season_sold(url):
                                      params={"action": "order.sold",
                                              "auth": "test_user:56a356e3d3b3e5e40ac1364b8a2b5cb42ccd6fbe:99999999999",
                                              "uid": "12345678901234567893",
-                                             "id": "createdOrderId",
+                                             "id": "order_id",
                                              "city_id": "41043"}, verify=False).json()
     with step("заказ продан"):
         print(order_season_sold)
@@ -146,7 +146,7 @@ def test_order_season_cancel(url):
                                        params={"action": "order.cancel",
                                                "auth": "test_user:56a356e3d3b3e5e40ac1364b8a2b5cb42ccd6fbe:99999999999",
                                                "uid": "12345678901234567893",
-                                               "id": "createdOrderId",
+                                               "id": "order_id",
                                                "city_id": "41043"}, verify=False).json()
     with step("заказ отменен"):
         print(order_season_cancel)
