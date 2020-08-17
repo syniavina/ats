@@ -124,15 +124,18 @@ def test_order_season_create(url):
         print(order_season_create)
         assert order_season_create["result"], \
             f"заказ не создан"
+    print(order_season_create)
+    order_id = order_season_create['result']['id']
+    return order_id
 
 
 # 9. Продаем заказ
-def test_order_season_sold(url):
+def test_order_season_sold(url, test_get_last_order_id):
     order_season_sold = requests.get(url=f'{url}',
                                      params={"action": "order.sold",
                                              "auth": "test_user:56a356e3d3b3e5e40ac1364b8a2b5cb42ccd6fbe:99999999999",
                                              "uid": "12345678901234567893",
-                                             "id": "order_id",
+                                             "id": {test_get_last_order_id},
                                              "city_id": "41043"}, verify=False).json()
     with step("заказ продан"):
         print(order_season_sold)
@@ -141,12 +144,12 @@ def test_order_season_sold(url):
 
 
 # 10. Отменяем заказ
-def test_order_season_cancel(url):
+def test_order_season_cancel(url, test_get_last_order_id):
     order_season_cancel = requests.get(url=f'{url}',
                                        params={"action": "order.cancel",
                                                "auth": "test_user:56a356e3d3b3e5e40ac1364b8a2b5cb42ccd6fbe:99999999999",
                                                "uid": "12345678901234567893",
-                                               "id": "order_id",
+                                               "id": {test_get_last_order_id},
                                                "city_id": "41043"}, verify=False).json()
     with step("заказ отменен"):
         print(order_season_cancel)
